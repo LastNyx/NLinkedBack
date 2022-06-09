@@ -26,7 +26,7 @@ export class Post {
   @OneToMany(() => Image, (image: Image) => image.post,{ eager: true })
   public images: Image[];
 
-  @OneToMany(() => Link, (link: Link) => link.post,{ eager: true })
+  @OneToMany(() => Link, (link: Link) => link.post,)
   public links: Link[];
 
   @OneToMany(() => Secret, (secret: Secret) => secret.post)

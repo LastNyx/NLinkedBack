@@ -13,6 +13,9 @@ import {
 export class TagsRepository extends Repository<Tag>{
 
   async getTags(query){
+    const take= 5
+    const page=query.page || "1"
+    const skip= (page-1) * take 
     const search=query.search || ""
 
     const tags = await this.find({

@@ -19,26 +19,20 @@ export class PostsRepository extends Repository<Post> {
     const limit= 5
     const page=query.page || "1";
     const search=query.search || ""
-    const tag = query.tag || ""
+    const id = query.tag || ""
     const skip= (page-1) * limit ;
 
     const posts = this.createQueryBuilder("posts")
         .leftJoinAndSelect("posts.author", "author")
         .leftJoinAndSelect("posts.images", "images")
-        .leftJoin("posts.tags", "tags")
+        .leftJoinAndSelect("posts.tags", "tags")
         .orderBy("posts.created_at", "DESC")
-        // .groupBy("posts.id")
-        // .take(limit)
-        // .skip(skip)
-        // .where("tags.name = :name", { name: tag })
-        // .groupBy("posts.title")
-        // .getMany()
+        .groupBy("posts.title")
 
-    // if(tag !== ""){
-    //   posts.where("tags.name = IN(:name)",{name: tag})
-    // }
-
-    // return posts
+    if(id !== ""){
+      posts.where("tags.id = :id", { id: id })
+    }
+    
     return await paginate<Post>(posts, { page, limit, route: '/posts/test' });
   }
 
@@ -101,9 +95,22 @@ export class PostsRepository extends Repository<Post> {
     const page=query.page || "1";
     const skip= (page-1) * take ;
     const search=query.search || ""
+    const id = query.tag|| 24
+
+    if(id !== ""){
+      const tagId = id
+    }
 
     const [posts, total] = await this.findAndCount({
-      where: {title: Like('%' + search + '%')},
+      where: [
+        {title: Like('%' + search + '%')},
+        // {tags: {
+        //   id: tag
+        // }}
+        // (qb) => {
+        //   qb.where("tags.id = :id", { id: tagId });
+        // }
+      ],
       order: {
         id: 'DESC'
       },
@@ -141,9 +148,9 @@ export class PostsRepository extends Repository<Post> {
   }
 
   async getPostById(id: number, userRole:string){
-    let secret = []
+    let secret = ['links']
     if (userRole == "ADMIN" || userRole == "CONTRIBUTOR" || userRole == "PREMIUM_USER"){
-      secret = ['secrets']
+      secret.push('secrets')
     }
     const post = await this.findOne(id, {relations: secret});
     if(post){

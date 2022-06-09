@@ -1,7 +1,5 @@
 import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt'
-import { AuthLoginDto } from './dto/auth-login.dto'
-import { User } from './entities/user.entity'
 import { UsersRepository } from './users.repository'
 import { InjectRepository } from '@nestjs/typeorm';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
