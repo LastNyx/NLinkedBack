@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { TypeOrmOptionsFactory, TypeOrmModuleOptions } from '@nestjs/typeorm'
+import { join } from 'path';
 import 'dotenv/config'
 
 @Injectable()
@@ -17,8 +18,8 @@ export class DatabaseConnectionService implements TypeOrmOptionsFactory {
       synchronize: true,
       dropSchema: false,
       logging: true,
-      autoLoadEntities: true,
-      // entities: ['dist/**/*.entity.js'],
+      // entities: [join(__dirname, '**', '*.entity.{ts,js}')]
+      entities: ['dist/**/*.entity.js'],
       // entities: [__dirname + '/**/*.entity.{ts,js}']
     }
   }
