@@ -19,18 +19,40 @@ const typeorm_1 = require("typeorm");
 const tag_entity_1 = require("./entities/tag.entity");
 let TagsRepository = class TagsRepository extends typeorm_1.Repository {
     async getTags(query) {
-        const take = 5;
+        const take = 10;
         const page = query.page || "1";
         const skip = (page - 1) * take;
         const search = query.search || "";
-        const tags = await this.find({
+        const [tags, total] = await this.findAndCount({
             where: { name: (0, typeorm_1.Like)('%' + search + '%') },
             order: {
-                id: 'ASC'
+                name: 'ASC'
             },
+            take: take,
+            skip: skip
         });
+        const page_count = Math.ceil(total / take);
+        const hasPrev = page > 1;
+        const hasNext = page < page_count;
+        let prev = null;
+        let next = null;
+        if (hasPrev) {
+            prev = parseInt(page) - 1;
+        }
+        if (hasNext) {
+            next = parseInt(page) + 1;
+        }
         return {
+            search_query: search,
+            current_page: page,
             data: tags,
+            total: total,
+            page_count: page_count,
+            hasPrev: page > 1,
+            prev: prev,
+            hasNext: page < page_count,
+            next: next,
+            per_page: take,
         };
     }
     async getTagsById(query, id) {

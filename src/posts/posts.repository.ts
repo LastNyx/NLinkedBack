@@ -27,11 +27,12 @@ export class PostsRepository extends Repository<Post> {
         .leftJoinAndSelect("posts.images", "images")
         .leftJoinAndSelect("posts.tags", "tags")
         .orderBy("posts.created_at", "DESC")
-        .groupBy("posts.title")
-
+    
     if(id !== ""){
       posts.where("tags.id = :id", { id: id })
     }
+        
+    posts.groupBy("posts.title")
     
     return await paginate<Post>(posts, { page, limit, route: '/posts/test' });
   }
@@ -41,7 +42,7 @@ export class PostsRepository extends Repository<Post> {
     const page=query.page || "1";
     const skip= (page-1) * take ;
     const search=query.search || ""
-    const tag = query.tag|| ""
+    // const tag = query.tag|| ""
     let secret = []
     if (userRole == "ADMIN" || userRole == "CONTRIBUTOR" || userRole == "PREMIUM_USER"){
       secret = ['secrets']
@@ -50,9 +51,9 @@ export class PostsRepository extends Repository<Post> {
     const [posts, total] = await this.findAndCount({
       where: [
         {title: Like('%' + search + '%')},
-        {tags: {
-          name: In(tag)
-        }}
+        // {tags: {
+        //   name: In(tag)
+        // }}
       ],
       order: {
         id: 'DESC'

@@ -22,11 +22,11 @@ let PostsRepository = class PostsRepository extends typeorm_1.Repository {
             .leftJoinAndSelect("posts.author", "author")
             .leftJoinAndSelect("posts.images", "images")
             .leftJoinAndSelect("posts.tags", "tags")
-            .orderBy("posts.created_at", "DESC")
-            .groupBy("posts.title");
+            .orderBy("posts.created_at", "DESC");
         if (id !== "") {
             posts.where("tags.id = :id", { id: id });
         }
+        posts.groupBy("posts.title");
         return await (0, nestjs_typeorm_paginate_1.paginate)(posts, { page, limit, route: '/posts/test' });
     }
     async getPosts(query, userRole) {
@@ -34,7 +34,6 @@ let PostsRepository = class PostsRepository extends typeorm_1.Repository {
         const page = query.page || "1";
         const skip = (page - 1) * take;
         const search = query.search || "";
-        const tag = query.tag || "";
         let secret = [];
         if (userRole == "ADMIN" || userRole == "CONTRIBUTOR" || userRole == "PREMIUM_USER") {
             secret = ['secrets'];
@@ -42,9 +41,6 @@ let PostsRepository = class PostsRepository extends typeorm_1.Repository {
         const [posts, total] = await this.findAndCount({
             where: [
                 { title: (0, typeorm_1.Like)('%' + search + '%') },
-                { tags: {
-                        name: (0, typeorm_1.In)(tag)
-                    } }
             ],
             order: {
                 id: 'DESC'

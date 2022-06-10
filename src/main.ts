@@ -7,13 +7,13 @@ import * as cookieParser from 'cookie-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const options = new DocumentBuilder()
-    .setTitle('Todo Crud')
-    .setDescription('The todo API Description')
-    .setVersion('1.0')
-    .build()
-  const document = SwaggerModule.createDocument(app, options)
-  SwaggerModule.setup('api/docs', app, document);
+  // const options = new DocumentBuilder()
+  //   .setTitle('Todo Crud')
+  //   .setDescription('The todo API Description')
+  //   .setVersion('1.0')
+  //   .build()
+  // const document = SwaggerModule.createDocument(app, options)
+  // SwaggerModule.setup('api/docs', app, document);
 
   app.enableCors({ credentials: true, 
     preflightContinue: false, 

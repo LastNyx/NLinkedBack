@@ -25,8 +25,8 @@ let TagsService = class TagsService {
         await this.tagsRepository.save(tag);
         throw new common_1.HttpException("success", common_1.HttpStatus.OK);
     }
-    findAll(search) {
-        return this.tagsRepository.getTags({ search });
+    findAll(search, page) {
+        return this.tagsRepository.getTags({ search, page });
     }
     findOne(page, id) {
         return this.tagsRepository.getTagsById({ page }, id);

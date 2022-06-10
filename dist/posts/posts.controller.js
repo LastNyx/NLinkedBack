@@ -76,7 +76,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], PostsController.prototype, "create", null);
 __decorate([
-    (0, common_1.Get)("/test"),
+    (0, common_1.Get)("tag"),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),

@@ -24,8 +24,8 @@ export class TagsService {
     throw new HttpException("success", HttpStatus.OK);
   }
 
-  findAll(search: string) {
-    return this.tagsRepository.getTags({search});
+  findAll(search: string, page: string) {
+    return this.tagsRepository.getTags({search, page});
   }
 
   findOne(page: number, id: number) {

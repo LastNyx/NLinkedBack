@@ -28,8 +28,8 @@ let TagsController = class TagsController {
     create(createTagDto) {
         return this.tagsService.create(createTagDto);
     }
-    findAll({ search }) {
-        return this.tagsService.findAll(search);
+    findAll({ search, page }) {
+        return this.tagsService.findAll(search, page);
     }
     findOne({ page }, id) {
         return this.tagsService.findOne(page, +id);

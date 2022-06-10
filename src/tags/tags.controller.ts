@@ -21,8 +21,8 @@ export class TagsController {
   }
 
   @Get()
-  findAll(@Query() {search}) {
-    return this.tagsService.findAll(search);
+  findAll(@Query() {search, page}) {
+    return this.tagsService.findAll(search, page);
   }
 
   @Get(':id')

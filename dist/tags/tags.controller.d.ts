@@ -5,10 +5,20 @@ export declare class TagsController {
     private readonly tagsService;
     constructor(tagsService: TagsService);
     create(createTagDto: CreateTagDto): Promise<void>;
-    findAll({ search }: {
+    findAll({ search, page }: {
         search: any;
+        page: any;
     }): Promise<{
+        search_query: any;
+        current_page: any;
         data: import("./entities/tag.entity").Tag[];
+        total: number;
+        page_count: number;
+        hasPrev: boolean;
+        prev: any;
+        hasNext: boolean;
+        next: any;
+        per_page: number;
     }>;
     findOne({ page }: {
         page: any;

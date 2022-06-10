@@ -6,8 +6,17 @@ export declare class TagsService {
     private tagsRepository;
     constructor(tagsRepository: TagsRepository);
     create(createTagDto: CreateTagDto): Promise<void>;
-    findAll(search: string): Promise<{
+    findAll(search: string, page: string): Promise<{
+        search_query: any;
+        current_page: any;
         data: Tag[];
+        total: number;
+        page_count: number;
+        hasPrev: boolean;
+        prev: any;
+        hasNext: boolean;
+        next: any;
+        per_page: number;
     }>;
     findOne(page: number, id: number): Promise<any[]>;
     findByNames(tagsName: Array<string>): Promise<Tag[]>;

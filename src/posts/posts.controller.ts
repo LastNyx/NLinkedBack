@@ -34,7 +34,7 @@ export class PostsController {
     return this.postsService.create(createPostDto, tags, req.user);
   }
 
-  @Get("/test")
+  @Get("tag")
   getTest(@Query() {page, search, tag}){
     return this.postsService.test(page, search, tag)
   }

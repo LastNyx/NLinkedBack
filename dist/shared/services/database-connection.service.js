@@ -22,7 +22,7 @@ let DatabaseConnectionService = class DatabaseConnectionService {
             synchronize: true,
             dropSchema: false,
             logging: true,
-            entities: ['dist/**/*.entity.js'],
+            autoLoadEntities: true,
         };
     }
 };
