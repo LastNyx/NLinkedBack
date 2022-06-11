@@ -12,7 +12,7 @@ import { AuthModule } from './auth/auth.module';
 import { RolesModule } from './roles/roles.module';
 import { SecretsModule } from './secrets/secrets.module';
 
-import * as Joi from '@hapi/joi'
+import * as Joi from 'joi'
 
 @Module({
   imports: [

@@ -20,7 +20,7 @@ const tags_module_1 = require("./tags/tags.module");
 const auth_module_1 = require("./auth/auth.module");
 const roles_module_1 = require("./roles/roles.module");
 const secrets_module_1 = require("./secrets/secrets.module");
-const Joi = require("@hapi/joi");
+const Joi = require("joi");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
