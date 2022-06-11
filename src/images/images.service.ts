@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+//import { InjectRepository } from '@nestjs/typeorm';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
 import { ImagesRepository } from './images.repository'
@@ -7,7 +7,7 @@ import { ImagesRepository } from './images.repository'
 @Injectable()
 export class ImagesService {
   constructor(
-    @InjectRepository(ImagesRepository)
+    // @InjectRepository(ImagesRepository)
     private imagesRepository:ImagesRepository
   ){}
 
