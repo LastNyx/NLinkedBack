@@ -12,7 +12,6 @@ require("dotenv/config");
 let DatabaseConnectionService = class DatabaseConnectionService {
     createTypeOrmOptions() {
         return {
-            name: 'default',
             type: process.env.DATABASE_TYPE,
             host: process.env.DATABASE_HOST,
             port: Number(process.env.DATABASE_PORT),

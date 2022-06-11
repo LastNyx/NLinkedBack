@@ -8,7 +8,7 @@ export class DatabaseConnectionService implements TypeOrmOptionsFactory {
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
-      name: 'default',
+      // name: 'default',
       type: process.env.DATABASE_TYPE as any,
       host: process.env.DATABASE_HOST,
       port: Number(process.env.DATABASE_PORT),
